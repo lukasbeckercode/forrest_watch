@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Forrest Watch</string>
+    <string name="register_toolbox_title">Register a new Account</string>
+    <string name="til_register_firstname_hint">Enter First Name</string>
+    <string name="til_lastname_hint">Enter Last Name</string>
+    <string name="et_login_email_hint">Enter E-Mail Address</string>
+    <string name="et_login_password_hint">Enter a Password</string>
+    <string name="til_register_confirmpassword_hint">Enter Password Again</string>
+    <string name="cb_register_termsandcondition_text">Accept Terms and Conditions</string>
+    <string name="btn_register_register_text">Register Now</string>
+    <string name="tv_register_alreadyhaveanaccount_text">Already have an Account?</string>
+    <string name="tv_register_login_text">Login</string>
+    <string name="error_empty_email">E-Mail cannot be empty!</string>
+    <string name="error_empty_passwd">Password cannot be empty!</string>
+    <string name="error_empty_firstname">First name cannot be empty!</string>
+    <string name="error_empty_lastname">Last name cannot be empty!</string>
+    <string name="error_email_or_password_registration">Invalid Email or Passwords not matching! Please review input.</string>
+    <string name="registration_success">You were registered successfully!</string>
+    <string name="registration_failure">Registration failed: </string>
+    <string name="login_success">You were successfully logged in!</string>
+    <string name="login_failure">Login failed!</string>
+    <string name="login_error_user_data">Error while retrieving user data!</string>
+    <string name="tv_login_title_text">Welcome!</string>
+    <string name="tv_login_donthaveanaccount_text">Don\'t have an account?</string>
+    <string name="tv_login_register_text">Register</string>
+    <string name="tv_login_forgotpassword_text">Forgot Password?</string>
+    <string name="btn_login_login_text">Login</string>
+</resources>

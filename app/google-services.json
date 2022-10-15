@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "60561713937",
+    "project_id": "forestwatch-67923",
+    "storage_bucket": "forestwatch-67923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60561713937:android:ac82acb41c6c19ca98bab0",
+        "android_client_info": {
+          "package_name": "com.lukasbeckercode.forrestwatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60561713937-hi6ql2ahippnqm39jjou62nt43ohtvoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHK_5tkOtzTO0ByBnKP_rOd8AqzhQyBos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60561713937-hi6ql2ahippnqm39jjou62nt43ohtvoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
