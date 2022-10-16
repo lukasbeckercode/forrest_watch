@@ -1,8 +1,9 @@
-package com.lukasbeckercode.forrestwatch
+package com.lukasbeckercode.forrestwatch.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.models.User
 
 class HomeActivity : AppCompatActivity() {

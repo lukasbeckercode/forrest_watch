@@ -25,4 +25,7 @@
     <string name="tv_login_register_text">Register</string>
     <string name="tv_login_forgotpassword_text">Forgot Password?</string>
     <string name="btn_login_login_text">Login</string>
+    <string name="error_email_user_nonexistent">No User with this email address found!</string>
+    <string name="forgot_password_success">A recovery email was sent to your email address!</string>
+    <string name="btn_forgot_forgot">Send account recovery email</string>
 </resources>

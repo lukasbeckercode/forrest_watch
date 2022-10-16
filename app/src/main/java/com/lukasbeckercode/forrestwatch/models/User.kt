@@ -13,10 +13,6 @@ class User(
 
 ):Parcelable {
 init {
-
-    when{
-    }
-
 }
 
     constructor(parcel: Parcel) : this(
