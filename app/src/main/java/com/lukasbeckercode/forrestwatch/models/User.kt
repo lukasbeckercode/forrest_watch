@@ -12,8 +12,6 @@ class User(
     var lastname: String?=""
 
 ):Parcelable {
-init {
-}
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
