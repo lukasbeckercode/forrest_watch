@@ -50,10 +50,14 @@ class FireBaseAuth {
 
     }
 
+    fun logOut(){
+        auth.signOut()
+    }
     fun register(user: User,password: String, registerActivity:Register){
 
         if(currentUser != null){
-            //TODO: Do something
+            logOut()
+            Toast.makeText(registerActivity,R.string.auth_current_user_logged_out, Toast.LENGTH_SHORT).show()
         }
         auth.createUserWithEmailAndPassword(user.email!!, password)
             .addOnCompleteListener(registerActivity) { task ->

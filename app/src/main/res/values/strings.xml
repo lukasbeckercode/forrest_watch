@@ -8,6 +8,7 @@
     <string name="til_register_confirmpassword_hint">Enter Password Again</string>
     <string name="cb_register_termsandcondition_text">Accept Terms and Conditions</string>
     <string name="btn_register_register_text">Register Now</string>
+    <string name="auth_current_user_logged_out">Current user logged out</string>
     <string name="tv_register_alreadyhaveanaccount_text">Already have an Account?</string>
     <string name="tv_register_login_text">Login</string>
     <string name="error_empty_email">E-Mail cannot be empty!</string>
