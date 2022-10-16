@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.lukasbeckercode.forrestwatch.Constants
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.models.User
 import com.lukasbeckercode.forrestwatch.ui.AuthActivity
@@ -16,7 +17,7 @@ class CloudFireStore {
     private val db = Firebase.firestore
 
     fun saveUser(user: User, registerActivity: Register){
-        db.collection("user").document(user.id!!).set(user, SetOptions.merge())
+        db.collection(Constants.firebaseTopic).document(user.id!!).set(user, SetOptions.merge())
             .addOnSuccessListener { registerActivity.registrationSuccess(user)}
             .addOnFailureListener { e->Log.e(registerActivity.javaClass.name,"Error during user saving to cloud",e) }
     }
@@ -26,7 +27,7 @@ class CloudFireStore {
         val uid = getCurrentUID()
         if(uid != "" && TextUtils.isEmpty(email)){
 
-            db.collection("user").document(uid).get()
+            db.collection(Constants.firebaseTopic).document(uid).get()
                 .addOnSuccessListener { result ->
                     val user = result.toObject(User::class.java)
                     authActivity.success(user!!)
@@ -51,8 +52,8 @@ class CloudFireStore {
     }
 
     private fun getUserByEmail(email:String, authActivity: AuthActivity):User?{
-        var user: User? = null;
-        db.collection("user").document(email).get()
+        var user: User? = null
+        db.collection(Constants.firebaseTopic).document(email).get()
             .addOnSuccessListener { result ->
                 user = result.toObject(User::class.java)
             }

@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.lukasbeckercode.forrestwatch.Constants
 import com.lukasbeckercode.forrestwatch.FireBaseAuth
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.models.User
@@ -37,7 +38,7 @@ class Login : AppCompatActivity(), AuthActivity {
 
     override fun success(user : User) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("user",user)
+        intent.putExtra(Constants.intentKey,user)
         startActivity(intent)
     }
 
