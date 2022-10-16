@@ -16,6 +16,7 @@
     <string name="error_empty_passwd">Password cannot be empty!</string>
     <string name="error_empty_firstname">First name cannot be empty!</string>
     <string name="error_empty_lastname">Last name cannot be empty!</string>
+    <string name="register_terms_unchecked">Please accept our Terms and Conditions</string>
     <string name="error_email_or_password_registration">Invalid Email or Passwords not matching! Please review input.</string>
     <string name="registration_success">You were registered successfully!</string>
     <string name="registration_failure">Registration failed: </string>
