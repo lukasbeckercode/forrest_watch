@@ -12,7 +12,6 @@ import com.lukasbeckercode.forrestwatch.models.User
 import com.lukasbeckercode.forrestwatch.ui.AuthActivity
 import com.lukasbeckercode.forrestwatch.ui.Register
 
-//TODO: collection names as constants!
 class CloudFireStore {
     private val db = Firebase.firestore
 
