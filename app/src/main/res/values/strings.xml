@@ -33,4 +33,10 @@
     <string name="error_email_user_nonexistent">No User with this email address found!</string>
     <string name="forgot_password_success">A recovery email was sent to your email address!</string>
     <string name="btn_forgot_forgot">Send account recovery email</string>
+
+    <!-- GPS related Text -->
+    <string name="error_gps_not_enabled_title">GPS disabled</string>
+    <string name="error_gps_not_enabled_body">Please enable GPS to use this App!</string>
+    <string name="error_gps_not_enabled_confirm">Enable now</string>
+    <string name="error_gps_permissions_not_granted">Permissions not granted!</string>
 </resources>
