@@ -12,12 +12,19 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.location.PermissionManager
 import com.lukasbeckercode.forrestwatch.models.User
 
-class HomeActivity : AppCompatActivity() {
-    private var LOCATION_PERMISSION_REQUEST_CODE = 99
+class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
+    private var requestCode = 99 //standard value 99 as per SO
+    private var map:GoogleMap? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -39,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
             }
             else -> {
                 PermissionManager().askAccessFineLocation(
-                    this,LOCATION_PERMISSION_REQUEST_CODE
+                    this,requestCode
                 )
             }
         }
@@ -47,6 +54,14 @@ class HomeActivity : AppCompatActivity() {
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //Needed to maintain compatibility with api level 23
         val tvWelcome :TextView = findViewById(R.id.tv_home_title)
         tvWelcome.text = user.firstname
+
+       val  mapView:SupportMapFragment = getSupportFragmentManager().findFragmentById(R.id.home_map_view) as SupportMapFragment
+       // var mvBundle:Bundle? = null
+        //if (savedInstanceState != null){
+          //  mvBundle = savedInstanceState.getBundle("MapViewBundleKey")
+        //}
+      //  mapView.onCreate(mvBundle)
+        mapView.getMapAsync(this)
 
 
     }
@@ -63,13 +78,6 @@ class HomeActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         fusedLocationProviderClient.requestLocationUpdates(
@@ -82,9 +90,10 @@ class HomeActivity : AppCompatActivity() {
                     for (location in locationResult.locations) {
                         tvLong.text = location.latitude.toString()
                         tvLat.text = location.longitude.toString()
+                        val pos = LatLng(location.latitude,location.longitude)
+                        map?.addMarker(MarkerOptions().position(pos))
+                        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(pos,15f))
                     }
-                    // Things don't end here
-                    // You may also update the location on your web app
                 }
             },
             Looper.getMainLooper()
@@ -93,19 +102,16 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        // A random request code to listen on later
         permissions: Array<out String>,
         grantResults:IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            // Location Permission
-            LOCATION_PERMISSION_REQUEST_CODE -> {
+            this.requestCode -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     when {
                         PermissionManager().isLocationEnabled(this) -> {
                             setLocationListener()
-                            // Setting things up
                         }
                         else -> {
                             PermissionManager().showGPSNotEnabledDialog(this)
@@ -116,5 +122,12 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        map = p0
+        map!!.addMarker(MarkerOptions().position(LatLng(48.2,16.3)))
+        map!!.moveCamera(CameraUpdateFactory.newLatLng(LatLng(48.2,16.3)))
+        map!!.moveCamera(CameraUpdateFactory.zoomTo(15f))
     }
 }
