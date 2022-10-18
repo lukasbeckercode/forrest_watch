@@ -44,6 +44,14 @@ class User(
   return true
     }
 
+    fun destroy(){
+        id = ""
+        firstname = ""
+        lastname = ""
+        email = ""
+
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(email)

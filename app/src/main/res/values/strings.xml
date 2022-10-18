@@ -53,4 +53,9 @@
     <string name="tree_view_delete_confirm">Confirm deletion</string>
     <string name="tree_view_delete_success">Tree deleted successfully!</string>
     <string name="tree_view_delete_failure">Tree deletion failed!</string>
+
+    <!-- Sign out-->
+    <string name="tv_sign_out">Sign out</string>
+    <string name="sign_out_success">Sign out successful!</string>
+    <string name="no_user_signed_in">No user signed in!</string>
 </resources>

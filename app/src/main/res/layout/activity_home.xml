@@ -85,5 +85,17 @@
         app:layout_constraintTop_toBottomOf="@id/btn_home_save"
         android:textStyle="bold"
         android:layout_marginTop="16dp"/>
+    <TextView
+    android:id="@+id/tv_home_logout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/tv_5dp_padding"
+    android:textSize="@dimen/tv_16sp_textsize"
+    android:text="@string/tv_sign_out"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_home_gotolistview"
+    android:textStyle="bold"
+    android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

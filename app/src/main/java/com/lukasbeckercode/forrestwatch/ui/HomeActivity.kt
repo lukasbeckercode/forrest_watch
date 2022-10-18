@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lukasbeckercode.forrestwatch.Constants
+import com.lukasbeckercode.forrestwatch.FireBaseAuth
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.location.PermissionManager
 import com.lukasbeckercode.forrestwatch.models.MarkedTree
@@ -31,14 +32,24 @@ import java.util.*
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private var requestCode = 99 //standard value 99 as per SO
     private var map:GoogleMap? = null
+    private lateinit var user:User
     var pos:LatLng? = null
+
+    override fun onStart() {
+        super.onStart()
+        if(user.id == ""){ //prevents showing this view if user presses the back button  after sign-out
+            Toast.makeText(this,R.string.no_user_signed_in,Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this,MainActivity::class.java))
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        var user = User()
+         user = User()
         if (intent.hasExtra(Constants.intentKeyUser)){
             user = intent.getParcelableExtra(Constants.intentKeyUser)!!
         }
+
         when {
 
             PermissionManager().isFineLocationGranted(this) -> {
@@ -79,6 +90,14 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         val tvGoToTreeView:TextView = findViewById(R.id.tv_home_gotolistview)
         tvGoToTreeView.setOnClickListener {
             startActivity(Intent(this,TreeView::class.java))
+        }
+
+        val tvSignOut:TextView = findViewById(R.id.tv_home_logout)
+        tvSignOut.setOnClickListener{
+            FireBaseAuth().logOut()
+            user.destroy()
+            Toast.makeText(this,R.string.sign_out_success,Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this,MainActivity::class.java))
         }
 
 
