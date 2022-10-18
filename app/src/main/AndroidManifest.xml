@@ -23,7 +23,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".TreeMapView"
+            android:name=".ui.TreeMapView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

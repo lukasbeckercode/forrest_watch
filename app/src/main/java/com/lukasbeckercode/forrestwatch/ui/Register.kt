@@ -63,7 +63,7 @@ class Register : AppCompatActivity() {
 
         Toast.makeText(baseContext, R.string.registration_success,Toast.LENGTH_SHORT).show()
         val intent = Intent(this,HomeActivity::class.java)
-        intent.putExtra(Constants.intentKey,user)
+        intent.putExtra(Constants.intentKeyUser,user)
         startActivity(intent)
     }
 }

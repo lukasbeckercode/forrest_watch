@@ -38,7 +38,7 @@ class Login : AppCompatActivity(), AuthActivity {
 
     override fun success(user : User) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra(Constants.intentKey,user)
+        intent.putExtra(Constants.intentKeyUser,user)
         startActivity(intent)
     }
 

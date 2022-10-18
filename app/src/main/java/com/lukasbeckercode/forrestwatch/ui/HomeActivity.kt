@@ -36,8 +36,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         var user = User()
-        if (intent.hasExtra(Constants.intentKey)){
-            user = intent.getParcelableExtra(Constants.intentKey)!!
+        if (intent.hasExtra(Constants.intentKeyUser)){
+            user = intent.getParcelableExtra(Constants.intentKeyUser)!!
         }
         when {
 
