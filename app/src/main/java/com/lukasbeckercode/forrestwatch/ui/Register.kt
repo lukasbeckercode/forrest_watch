@@ -9,6 +9,9 @@ import com.lukasbeckercode.forrestwatch.FireBaseAuth
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.models.User
 
+/**
+ * Class handling User registration process
+ */
 class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,9 @@ class Register : AppCompatActivity() {
     }
 
 
-
+    /**
+     * Takes the input data, validates it and writes it to the corresponding Firebase places (auth and Store)
+     */
     private fun register(){
 
         val email:String= findViewById<EditText>(R.id.et_register_email).text.toString()
@@ -38,7 +43,7 @@ class Register : AppCompatActivity() {
 
         val terms: CheckBox = findViewById(R.id.cb_register_termsandcondition)
 
-        if(!terms.isChecked){
+        if(!terms.isChecked){ //check terms and conditions checkbox
             Toast.makeText(this,R.string.register_terms_unchecked,Toast.LENGTH_SHORT).show()
             return
         }
@@ -46,11 +51,13 @@ class Register : AppCompatActivity() {
         val user: User?
 
         try {
+            //try to create a new user object
             user  = User(email =email, firstname = firstname, lastname = lastname)
-        } catch (e: java.lang.IllegalArgumentException){
-            Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
+        } catch (e: java.lang.IllegalArgumentException){ //some data is invalid!
+            Toast.makeText(this,e.message,Toast.LENGTH_LONG).show() //Tell the user what data is invalid
             return
         }
+        //simple email validation,also checks if the 2 entered passwords match
         if(!user.validate(password,confirmPassword)){
             Toast.makeText(baseContext, R.string.error_email_or_password_registration,
                 Toast.LENGTH_SHORT).show()
@@ -59,6 +66,12 @@ class Register : AppCompatActivity() {
         }
     }
 
+    /**
+     * called after registration was successful
+     * @see FireBaseAuth
+     * @see com.lukasbeckercode.forrestwatch.database.CloudFireStore
+     * @param user object of registered user
+     */
     fun registrationSuccess(user:User){
 
         Toast.makeText(baseContext, R.string.registration_success,Toast.LENGTH_SHORT).show()

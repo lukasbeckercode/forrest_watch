@@ -13,13 +13,22 @@ import com.lukasbeckercode.forrestwatch.ui.ForgotPassword
 import com.lukasbeckercode.forrestwatch.ui.Login
 import com.lukasbeckercode.forrestwatch.ui.Register
 
+/**
+ * Class that handles all Firebase Authentication functionality
+ * @author lukas becker
+ */
 class FireBaseAuth {
     private val auth = Firebase.auth
     private val currentUser = auth.currentUser
 
-
+    /**
+     * Log an already registered user in
+     * @param email email address associated with the user
+     * @param password the users password
+     */
     fun logInUser(email:String,password:String, loginActivity:Login){
 
+        //Check validity of user input
         when{
             TextUtils.isEmpty(email) -> {
                 Toast.makeText(loginActivity, R.string.error_empty_email, Toast.LENGTH_SHORT).show()
@@ -31,6 +40,7 @@ class FireBaseAuth {
             }
         }
 
+        //authenticate user and get user data
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener{task->
                 run {
@@ -53,15 +63,31 @@ class FireBaseAuth {
 
     }
 
+    /**
+     * sings a user out
+     * Caution: does not destroy User() Object, do that in the corresponding Class
+     * @see com.lukasbeckercode.forrestwatch.ui.HomeActivity
+     */
     fun logOut(){
         auth.signOut()
     }
+
+    /**
+     * registers a user and stores user data
+     * DOES NOT STORE PASSWORD LOCALLY!
+     *
+     * @param user the user object that will be registered
+     * @param password the users password in cleartext
+     * @param registerActivity the calling Activity
+     */
     fun register(user: User,password: String, registerActivity:Register){
 
         if(currentUser != null){
-            logOut()
+            logOut() //log out current user ifa new user wants to register
             Toast.makeText(registerActivity,R.string.auth_current_user_logged_out, Toast.LENGTH_SHORT).show()
         }
+
+        //register user with firebase auth
         auth.createUserWithEmailAndPassword(user.email!!, password)
             .addOnCompleteListener(registerActivity) { task ->
                 if (task.isSuccessful) {
@@ -70,7 +96,7 @@ class FireBaseAuth {
                     val firebaseUser = auth.currentUser
                     if (firebaseUser != null) {
                         user.id = firebaseUser.uid
-                        CloudFireStore().saveUser(user,registerActivity)
+                        CloudFireStore().saveUser(user,registerActivity) //save user data
                     }
                 } else {
                     val base = registerActivity.getString(R.string.registration_failure)
@@ -83,6 +109,12 @@ class FireBaseAuth {
             }
     }
 
+    /**
+     * function to reset user password via email
+     *
+     * @param email email address of the user who wants to reset their password
+     * @param forgotPasswordActivity the calling Activity
+     */
     fun forgotPassword(email: String, forgotPasswordActivity:ForgotPassword){
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
             .addOnCompleteListener(forgotPasswordActivity){task->

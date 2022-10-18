@@ -29,12 +29,22 @@ import com.lukasbeckercode.forrestwatch.models.MarkedTree
 import com.lukasbeckercode.forrestwatch.models.User
 import java.util.*
 
+/**
+ * Home Class, user is registered and signed in when seeing this Activity
+ * Get the current GPS location of the user
+ * displays the location using a google maps fragment
+ * allows user to name their current location and save it, so infested trees can be located easily
+ */
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private var requestCode = 99 //standard value 99 as per SO
     private var map:GoogleMap? = null
     private lateinit var user:User
     var pos:LatLng? = null
 
+    /**
+     * gets called every time the Activity is started
+     * used to check if the User object has been destroyed by signing out
+     */
     override fun onStart() {
         super.onStart()
         if(user.id == ""){ //prevents showing this view if user presses the back button  after sign-out
@@ -46,12 +56,13 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
          user = User()
+        //get the logged in user
         if (intent.hasExtra(Constants.intentKeyUser)){
             user = intent.getParcelableExtra(Constants.intentKeyUser)!!
         }
 
         when {
-
+            //check permissions needed for location services
             PermissionManager().isFineLocationGranted(this) -> {
                 when {
                     PermissionManager().isLocationEnabled(this) -> {
@@ -68,6 +79,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
             }
         }
+
+        //deprecated! Needed to maintain compatibility with API Level 23
         LocationRequest().setInterval(5000).setFastestInterval(5000)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //Needed to maintain compatibility with api level 23
         val tvWelcome :TextView = findViewById(R.id.tv_home_title)
@@ -102,11 +115,18 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
+
+    /**
+     * Checks Location every 2 seconds
+     */
     private fun setLocationListener() {
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         // for getting the current location update after every 2 seconds with high accuracy
+        //Deprecated! Used to maintain compatibility with API Level 23
         val locationRequest = LocationRequest().setInterval(2000).setFastestInterval(2000)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+
+        //Check permissions again
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -117,6 +137,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         ) {
             return
         }
+
+        //get the current location and update it
         fusedLocationProviderClient.requestLocationUpdates(
             locationRequest,
             object : LocationCallback() {
@@ -137,6 +159,9 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
+    /**
+     * Handler for Permission requests
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -161,6 +186,9 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * actually show the map
+     */
     override fun onMapReady(p0: GoogleMap) {
         map = p0
         map!!.addMarker(MarkerOptions().position(LatLng(48.2,16.3)))
@@ -168,6 +196,10 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         map!!.moveCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
+    /**
+     * called if tree was saved successfully
+     * @see com.lukasbeckercode.forrestwatch.database.CloudFireStore
+     */
     fun saveSuccess() {
         Toast.makeText(this,R.string.home_tree_save_success,
             Toast.LENGTH_SHORT).show()

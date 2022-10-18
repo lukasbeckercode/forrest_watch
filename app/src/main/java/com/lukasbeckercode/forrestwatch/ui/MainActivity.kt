@@ -6,6 +6,10 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.lukasbeckercode.forrestwatch.R
 
+/**
+ * first Screen the user sees
+ * kept because more functionality then currently implemented might be added later on
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

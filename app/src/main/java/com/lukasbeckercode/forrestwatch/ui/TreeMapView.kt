@@ -12,6 +12,11 @@ import com.lukasbeckercode.forrestwatch.Constants
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.models.Coordinates
 
+/**
+ * Shows a marked Tree on a Fullscreen Map
+ * @see Coordinates
+ * @author lukas becker
+ */
 class TreeMapView : AppCompatActivity(),OnMapReadyCallback {
     private lateinit var coordinates:Coordinates
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +30,9 @@ class TreeMapView : AppCompatActivity(),OnMapReadyCallback {
         mapView.getMapAsync(this)
     }
 
+    /**
+     * go to the location of the marked tree and zoom in
+     */
     override fun onMapReady(p0: GoogleMap) {
         p0.addMarker(MarkerOptions().position(LatLng(coordinates.lat,coordinates.long)))
         p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(coordinates.lat,coordinates.long),30f))

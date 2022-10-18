@@ -12,7 +12,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.lukasbeckercode.forrestwatch.R
 
+/**
+ * Helper class for GPS Tracking permission management
+ */
 class PermissionManager {
+    /**
+     * ask user for permission to track fine location
+     */
     fun askAccessFineLocation(activity: AppCompatActivity, requestId: Int) {
         ActivityCompat.requestPermissions(
             activity,
@@ -21,6 +27,9 @@ class PermissionManager {
         )
     }
 
+    /**
+     * check if fine location is granted
+     */
     fun isFineLocationGranted(context: Context): Boolean {
         return ContextCompat
             .checkSelfPermission(
@@ -28,12 +37,20 @@ class PermissionManager {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
     }
+
+    /**
+     * check if location services are enabled
+     */
     fun isLocationEnabled(context: Context): Boolean {
         val locationManager: LocationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
+
+    /**
+     * ask the user to enable GPS
+     */
     fun showGPSNotEnabledDialog(context: Context) {
         AlertDialog.Builder(context)
             .setTitle(context.getString(R.string.error_gps_not_enabled_title))
