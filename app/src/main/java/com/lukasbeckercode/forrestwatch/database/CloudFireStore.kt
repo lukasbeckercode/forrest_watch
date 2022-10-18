@@ -8,17 +8,24 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lukasbeckercode.forrestwatch.Constants
 import com.lukasbeckercode.forrestwatch.R
+import com.lukasbeckercode.forrestwatch.models.MarkedTree
 import com.lukasbeckercode.forrestwatch.models.User
 import com.lukasbeckercode.forrestwatch.ui.AuthActivity
+import com.lukasbeckercode.forrestwatch.ui.HomeActivity
 import com.lukasbeckercode.forrestwatch.ui.Register
 
 class CloudFireStore {
     private val db = Firebase.firestore
 
     fun saveUser(user: User, registerActivity: Register){
-        db.collection(Constants.firebaseTopic).document(user.id!!).set(user, SetOptions.merge())
+        db.collection(Constants.firebaseUserTopic).document(user.id!!).set(user, SetOptions.merge())
             .addOnSuccessListener { registerActivity.registrationSuccess(user)}
             .addOnFailureListener { e->Log.e(registerActivity.javaClass.name,"Error during user saving to cloud",e) }
+    }
+    fun saveTree(tree: MarkedTree, saveActivity: HomeActivity){
+        db.collection(Constants.firebaseTreeTopic).document(tree.id.toString()).set(tree, SetOptions.merge())
+            .addOnSuccessListener { saveActivity.saveSuccess() }
+            .addOnFailureListener { e->Log.e(saveActivity.javaClass.name,"Error during user saving to cloud",e) }
     }
 
     fun getUserData(authActivity: AuthActivity,email: String = ""){
@@ -26,7 +33,7 @@ class CloudFireStore {
         val uid = getCurrentUID()
         if(uid != "" && TextUtils.isEmpty(email)){
 
-            db.collection(Constants.firebaseTopic).document(uid).get()
+            db.collection(Constants.firebaseUserTopic).document(uid).get()
                 .addOnSuccessListener { result ->
                     val user = result.toObject(User::class.java)
                     authActivity.success(user!!)
@@ -52,7 +59,7 @@ class CloudFireStore {
 
     private fun getUserByEmail(email:String, authActivity: AuthActivity):User?{
         var user: User? = null
-        db.collection(Constants.firebaseTopic).document(email).get()
+        db.collection(Constants.firebaseUserTopic).document(email).get()
             .addOnSuccessListener { result ->
                 user = result.toObject(User::class.java)
             }

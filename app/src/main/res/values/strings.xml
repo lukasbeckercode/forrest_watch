@@ -39,4 +39,9 @@
     <string name="error_gps_not_enabled_body">Please enable GPS to use this App!</string>
     <string name="error_gps_not_enabled_confirm">Enable now</string>
     <string name="error_gps_permissions_not_granted">Permissions not granted!</string>
+    <string name="hint_home_tv_name">Give the tree a name…</string>
+    <string name="btn_home_save_text">Mark Tree</string>
+    <string name="tv_home_go_to_list_view">Show all marked trees</string>
+    <string name="home_tree_save_success">Tree saved successfully: </string>
+    <string name="error_home_tree_name_empty">Please name the tree you want to mark!</string>
 </resources>

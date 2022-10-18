@@ -40,7 +40,25 @@
         app:layout_constraintTop_toBottomOf="@id/tv_home_lat"
         />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_home_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_map_view">
 
+        <EditText
+            android:id="@+id/et_home_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/hint_home_tv_name"
+            android:padding="@dimen/et_16dp_padding"
+            android:textSize="@dimen/et_16sp_textsize"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_home_save"
@@ -48,9 +66,24 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="@dimen/btn_8dp_padding"
-        android:text="@string/btn_login_login_text"
+        android:text="@string/btn_home_save_text"
         android:textSize="@dimen/btn_18sp_textsize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_map_view" />
+        app:layout_constraintTop_toBottomOf="@id/til_home_name" />
+
+
+    <TextView
+        android:id="@+id/tv_home_gotolistview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/tv_5dp_padding"
+        android:textSize="@dimen/tv_16sp_textsize"
+        android:text="@string/tv_home_go_to_list_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_home_save"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
