@@ -21,10 +21,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.lukasbeckercode.forrestwatch.Constants
 import com.lukasbeckercode.forrestwatch.R
 import com.lukasbeckercode.forrestwatch.location.PermissionManager
 import com.lukasbeckercode.forrestwatch.models.MarkedTree
 import com.lukasbeckercode.forrestwatch.models.User
+import java.util.*
 
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private var requestCode = 99 //standard value 99 as per SO
@@ -34,8 +36,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         var user = User()
-        if (intent.hasExtra("user")){
-            user = intent.getParcelableExtra("user")!!
+        if (intent.hasExtra(Constants.intentKey)){
+            user = intent.getParcelableExtra(Constants.intentKey)!!
         }
         when {
 
@@ -67,7 +69,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         val btnSave:Button = findViewById(R.id.btn_home_save)
         btnSave.setOnClickListener {
             val name:String = findViewById<EditText>(R.id.et_home_name).text.toString()
-            val tree = MarkedTree(pos!!.latitude,pos!!.longitude,name,user,this)
+            val tree = MarkedTree(pos!!.latitude,pos!!.longitude,name,user,this, UUID.randomUUID().toString())
             if(!tree.save()){
                 Toast.makeText(this,R.string.error_home_tree_name_empty,Toast.LENGTH_LONG)
                     .show()

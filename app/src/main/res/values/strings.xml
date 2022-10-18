@@ -45,4 +45,12 @@
     <string name="home_tree_save_success">Tree saved successfully: </string>
     <string name="error_home_tree_name_empty">Please name the tree you want to mark!</string>
     <string name="tree_picture_desc">A Tree Icon</string>
+
+    <!-- Card view Text -->
+    <string name="card_view_added_by">Added by: </string>
+    <string name="tree_view_delete_title">Delete Tree?</string>
+    <string name="tree_view_delete_content">Are you sure you want to delete this tree?</string>
+    <string name="tree_view_delete_confirm">Confirm deletion</string>
+    <string name="tree_view_delete_success">Tree deleted successfully!</string>
+    <string name="tree_view_delete_failure">Tree deletion failed!</string>
 </resources>

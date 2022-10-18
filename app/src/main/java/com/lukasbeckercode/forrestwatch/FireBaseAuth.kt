@@ -38,9 +38,12 @@ class FireBaseAuth {
                         CloudFireStore().getUserData(loginActivity)
                         Toast.makeText(loginActivity, R.string.login_success, Toast.LENGTH_LONG).show()
                     } else {
+                        val base = loginActivity.getText(R.string.login_failure)
+                        val exception = task.exception.toString()
+                        val errorText =  "$base$exception"
                         Toast.makeText(
                             loginActivity,
-                            R.string.login_failure.toString() + task.exception.toString(),
+                             errorText,
                             Toast.LENGTH_LONG
                         )
                             .show()
@@ -70,9 +73,11 @@ class FireBaseAuth {
                         CloudFireStore().saveUser(user,registerActivity)
                     }
                 } else {
+                    val base = registerActivity.getString(R.string.registration_failure)
+                    val exception = task.exception.toString()
                     // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(registerActivity, R.string.registration_failure.toString() + task.exception,
+                    Toast.makeText(registerActivity,"$base$exception",
                         Toast.LENGTH_SHORT).show()
                 }
             }

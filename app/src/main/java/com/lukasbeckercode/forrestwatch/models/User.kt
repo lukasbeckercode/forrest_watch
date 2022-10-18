@@ -1,5 +1,6 @@
 package com.lukasbeckercode.forrestwatch.models
 
+import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
 import android.text.TextUtils
@@ -32,9 +33,9 @@ class User(
         firstname = firstname!!.trim()
         lastname = lastname!!.trim()
         when{
-            TextUtils.isEmpty(email) -> throw IllegalArgumentException(R.string.error_empty_email.toString())
-            TextUtils.isEmpty(firstname) -> throw IllegalArgumentException(R.string.error_empty_firstname.toString())
-            TextUtils.isEmpty(lastname) -> throw IllegalArgumentException(R.string.error_empty_lastname.toString())
+            TextUtils.isEmpty(email) -> throw IllegalArgumentException(Resources.getSystem().getString(R.string.error_empty_email))
+            TextUtils.isEmpty(firstname) -> throw IllegalArgumentException(Resources.getSystem().getString(R.string.error_empty_firstname))
+            TextUtils.isEmpty(lastname) -> throw IllegalArgumentException(Resources.getSystem().getString(R.string.error_empty_lastname))
         }
         when{
              passwd.trim() != confirmPasswd.trim() -> return false
