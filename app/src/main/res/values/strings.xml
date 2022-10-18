@@ -44,4 +44,5 @@
     <string name="tv_home_go_to_list_view">Show all marked trees</string>
     <string name="home_tree_save_success">Tree saved successfully: </string>
     <string name="error_home_tree_name_empty">Please name the tree you want to mark!</string>
+    <string name="tree_picture_desc">A Tree Icon</string>
 </resources>

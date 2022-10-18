@@ -1,6 +1,7 @@
 package com.lukasbeckercode.forrestwatch.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
@@ -71,6 +72,11 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this,R.string.error_home_tree_name_empty,Toast.LENGTH_LONG)
                     .show()
             }
+        }
+
+        val tvGoToTreeView:TextView = findViewById(R.id.tv_home_gotolistview)
+        tvGoToTreeView.setOnClickListener {
+            startActivity(Intent(this,TreeView::class.java))
         }
 
 
